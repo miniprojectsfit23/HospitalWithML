@@ -11,12 +11,13 @@
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="shortcut icon" href="{% static 'core/images/logo.png' %}" type="image/x-png">
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.css'>
-
+	<link rel="stylesheet" type="text/css" href="{% static 'core/css/navbar.css' %}">
 	<title>Hospital ERP System - {{title}}</title>
 </head>
 
 <body>
 	<script src="{% static 'core/js/jquery-3.6.0.min.js' %}"></script>
+	<script src="{% static 'core/js/navbar.js' %}"></script>
 	<script src="{% static 'core/js/bootstrap.js' %}"></script>
 	{%include 'core/navbar.html'%}
 	{%block content%}
