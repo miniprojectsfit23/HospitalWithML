@@ -8,10 +8,21 @@ import uuid
 
 
 class User(AbstractUser):
+    isDoctor = models.BooleanField(verbose_name="Is User a Doctor?")
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=200, verbose_name="First Name")
     last_name = models.CharField(max_length=200, verbose_name="Last Name")
+    username = models.EmailField(max_length=254, unique=True,verbose_name="Email")
+    password = models.CharField(max_length=500,verbose_name="Password")
     slug = models.SlugField(max_length=100, unique=True)
+    activated=models.BooleanField(default=False,verbose_name="Is User activated?")
+    #for patients
+    age = models.PositiveIntegerField(validators=[MaxValueValidator(200)],verbose_name="Age",default=None)
+    disease = models.CharField(max_length=200,verbose_name="Diseases",default=None)
+    allergies = models.CharField(max_length=200,verbose_name="Allergies",default=None)
+    #for doctors
+    specialization = models.CharField(max_length=200, verbose_name="Specialization of Doctor",default=None)
+    patients = models.ManyToManyField("self",verbose_name="Patients Doctor is Treating",symmetrical=False,default=None)
 
     def __str__(self):
         return(self.first_name+" "+self.last_name)
@@ -20,23 +31,5 @@ class User(AbstractUser):
         return reverse("crud_patients:single", args=[self.slug])
     def save(self, **kwargs):
         if not self.slug:
-            self.slug=slugify(self.fname+self.lname)
-        super(Patient, self).save()
-
-
-class Patient(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
-    isDoctor = models.BooleanField(default=False, editable=False,verbose_name="Is User a Doctor?")
-    age = models.PositiveIntegerField(validators=[MaxValueValidator(200)],verbose_name="Age")
-    specialization = models.CharField(max_length=200, verbose_name="Specialization of Doctor")
-    disease = models.CharField(max_length=200,verbose_name="Diseases")
-    disease = models.CharField(max_length=200,verbose_name="Allergies")
-
-
-class Doctor(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
-    isDoctor = models.BooleanField(default=True, editable=False,verbose_name="Is User a Doctor?")
-    specialization = models.CharField(max_length=200, verbose_name="Specialization of Doctor")
-    patient = models.ForeignKey(Patient,verbose_name="patientsTreating",on_delete=models.CASCADE)
+            self.slug=slugify(self.first_name+self.last_name)
+        super().save()

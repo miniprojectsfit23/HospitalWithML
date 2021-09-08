@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
+from core.forms import RegisterDoctorForm, RegisterPatientForm,LoginFormDoctor,LoginFormPatient
+from django.contrib.auth import login,logout
+from django.shortcuts import redirect
 
 # Create your views here.
 
@@ -12,10 +15,52 @@ class HomeView(TemplateView):
         context['title'] = "Home"
         return context
 
-class LoginView(TemplateView):
-    template_name = "core/login.html"
+
+class RegisterDoctorView(CreateView):
+    form_class = RegisterDoctorForm
+    success_url = "/login-doctor/"
+    template_name = 'core/signup.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = "Login"
+        context['title'] = "Register As Doctor"
         return context
+
+
+class RegisterPatientView(CreateView):
+    form_class = RegisterPatientForm
+    success_url = "/login-patient/"
+    template_name = 'core/signup.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Register As Patient"
+        return context
+
+def login_view_doctor(request):
+    form = LoginFormDoctor(request.POST or None)
+    if request.POST and form.is_valid():
+        user = form.login(request)
+        if user == -1:
+            return render(request, 'core/login.html', {'title':'Login as Doctor','form': form })
+        else:
+            if user:
+                login(request, user)
+                return redirect("/")# Redirect to a success page.
+    return render(request, 'core/login.html', {'title':'Login as Doctor','form': form })
+
+def login_view_patient(request):
+    form = LoginFormPatient(request.POST or None)
+    if request.POST and form.is_valid():
+        user = form.login(request)
+        if user == -1:
+            return render(request, 'core/login.html', {'title':'Login as Patient','form': form })
+        else:
+            if user:
+                login(request, user)
+                return redirect("/")# Redirect to a success page.
+    return render(request, 'core/login.html', {'title':'Login as Patient','form': form })
+
+def logout_core(request):
+    logout(request)
+    return redirect("/")
