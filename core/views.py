@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import CreateView
 from core.forms import RegisterDoctorForm, RegisterPatientForm,LoginFormDoctor,LoginFormPatient
 from django.contrib.auth import login,logout
 from django.shortcuts import redirect
@@ -7,14 +7,17 @@ from django.shortcuts import redirect
 # Create your views here.
 
 
-class HomeView(TemplateView):
-    template_name = "core/home.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = "Home"
-        return context
-
+def homeview(request):
+    if request.user.is_authenticated:
+        if request.user.activated:
+            if request.user.isDoctor:
+                return render(request, 'core/doctor_home.html', {'title':'Doctor'})
+            else:
+                return render(request, 'core/paitent_home.html', {'title':'Patient'})
+        else:
+            return render(request, 'core/not_activated.html', {'title':'Contact Admin'})
+    else:
+        return render(request, 'core/home.html', {'title':'Home'})
 
 class RegisterDoctorView(CreateView):
     form_class = RegisterDoctorForm
