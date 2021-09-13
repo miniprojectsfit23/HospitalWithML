@@ -33,3 +33,11 @@ class User(AbstractUser):
         if not self.slug:
             self.slug=slugify(self.first_name+self.last_name)
         super().save()
+
+class Doctor(User):
+    class Meta:
+        proxy = True
+
+class Patient(User):
+    class Meta:
+        proxy = True

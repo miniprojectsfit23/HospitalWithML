@@ -13,7 +13,7 @@ def homeview(request):
             if request.user.isDoctor:
                 return render(request, 'core/doctor_home.html', {'title':'Doctor'})
             else:
-                return render(request, 'core/paitent_home.html', {'title':'Patient'})
+                return render(request, 'core/patient_home.html', {'title':'Patient'})
         else:
             return render(request, 'core/not_activated.html', {'title':'Contact Admin'})
     else:
