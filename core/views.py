@@ -3,6 +3,10 @@ from django.views.generic import CreateView
 from core.forms import RegisterDoctorForm, RegisterPatientForm,LoginFormDoctor,LoginFormPatient
 from django.contrib.auth import login,logout
 from django.shortcuts import redirect
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
+from .models import User
+
 
 # Create your views here.
 
@@ -19,10 +23,11 @@ def homeview(request):
     else:
         return render(request, 'core/home.html', {'title':'Home'})
 
-class RegisterDoctorView(CreateView):
+class RegisterDoctorView(SuccessMessageMixin,CreateView):
     form_class = RegisterDoctorForm
     success_url = "/login-doctor/"
     template_name = 'core/signup.html'
+    success_message = "You have been registered successfully. Please contact Administrator for activation"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -30,10 +35,11 @@ class RegisterDoctorView(CreateView):
         return context
 
 
-class RegisterPatientView(CreateView):
+class RegisterPatientView(SuccessMessageMixin,CreateView):
     form_class = RegisterPatientForm
     success_url = "/login-patient/"
     template_name = 'core/signup.html'
+    success_message = "You have been registered successfully. Please contact Administrator for activation"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -46,6 +52,9 @@ def login_view_doctor(request):
         user = form.login(request)
         if user == -1:
             return render(request, 'core/login.html', {'title':'Login as Doctor','form': form })
+        elif not user:
+            messages.add_message(request, messages.ERROR, "Invalid Credentials")
+            return render(request, 'core/login.html', {'title':'Login as Patient','form': form })
         else:
             if user:
                 login(request, user)
@@ -58,6 +67,9 @@ def login_view_patient(request):
         user = form.login(request)
         if user == -1:
             return render(request, 'core/login.html', {'title':'Login as Patient','form': form })
+        elif not user:
+            messages.add_message(request, messages.ERROR, "Invalid Credentials")
+            return render(request, 'core/login.html', {'title':'Login as Patient','form': form })
         else:
             if user:
                 login(request, user)
@@ -67,3 +79,24 @@ def login_view_patient(request):
 def logout_core(request):
     logout(request)
     return redirect("/")
+
+def add_remove_patients(request):
+    if request.user.is_authenticated:
+        if request.user.isDoctor:
+            if request.POST:
+                if request.POST['toggle']=='add':
+                    request.user.patients.add(User.objects.get(username=request.POST['add_patlist']))
+                    return redirect("/edit-patients/")
+                else:
+                    request.user.patients.remove(User.objects.get(username=request.POST['remove_patlist']))
+                    return redirect("/edit-patients/")
+            else:
+                rem_patients=request.user.patients.all()
+                add_patients=User.objects.filter(isDoctor=False)
+                for patient in rem_patients:
+                    add_patients=add_patients.exclude(username=patient.username)
+                return render(request, 'core/edit_patients.html', {'title':'Edit Patients', 'rem_patients':rem_patients,'add_patients':add_patients })
+        else:
+            return redirect("/")
+    else:
+        return redirect("/")

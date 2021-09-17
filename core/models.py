@@ -22,11 +22,12 @@ class User(AbstractUser):
     allergies = models.CharField(max_length=200,verbose_name="Allergies",default=None)
     #for doctors
     specialization = models.CharField(max_length=200, verbose_name="Specialization of Doctor",default=None)
-    patients = models.ManyToManyField("self",verbose_name="Patients Doctor is Treating",symmetrical=False,default=None)
+    patients = models.ManyToManyField("self",verbose_name="Patients Doctor is Treating",symmetrical=False,blank=True)
 
     def __str__(self):
         return(self.first_name+" "+self.last_name)
-
+    def get_full_name(self):
+        return(self.first_name+" "+self.last_name)
     def get_absolute_url(self):
         return reverse("crud_patients:single", args=[self.slug])
     def save(self, **kwargs):

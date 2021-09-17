@@ -7,7 +7,7 @@ class UserDoctorForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('activated', 'isDoctor', 'first_name',
-                  'last_name', 'username', 'specialization')
+                  'last_name', 'username', 'specialization','patients',)
 
 
 class UserPatientForm(forms.ModelForm):

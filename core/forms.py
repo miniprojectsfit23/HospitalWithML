@@ -62,6 +62,11 @@ class LoginFormDoctor(forms.Form):
     def login(self, request):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            messages.add_message(request, messages.ERROR, "Invalid Credentials")
+            return -1
         if User.objects.get(username=username).isDoctor:
             user = authenticate(username=username, password=password)
             return user
@@ -82,6 +87,11 @@ class LoginFormPatient(forms.Form):
     def login(self, request):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            messages.add_message(request, messages.ERROR, "Invalid Credentials")
+            return -1
         if not User.objects.get(username=username).isDoctor:
             user = authenticate(username=username, password=password)
             return user
