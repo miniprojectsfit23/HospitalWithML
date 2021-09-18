@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import User
 from django.contrib.auth import authenticate
 from django.contrib import messages
-
+from django.contrib.auth import update_session_auth_hash
 
 
 class RegisterDoctorForm(UserCreationForm):

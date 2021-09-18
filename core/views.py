@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.views.generic import CreateView
+from django.views.generic.edit import UpdateView
 from core.forms import RegisterDoctorForm, RegisterPatientForm,LoginFormDoctor,LoginFormPatient
 from django.contrib.auth import login,logout
 from django.shortcuts import redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from .models import User
+from django.http import Http404
 
 
 # Create your views here.
@@ -100,3 +102,58 @@ def add_remove_patients(request):
             return redirect("/")
     else:
         return redirect("/")
+class UpdatePatientView(SuccessMessageMixin,UpdateView):
+    model=User
+    form_class = RegisterPatientForm
+    success_url = "/login-patient/"
+    template_name = 'core/update.html'
+    success_message = "Your account has been updated successfully. You need to login again"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Update Patient"
+        return context
+    def get_object(self, queryset=None):
+        if not self.request.user.is_authenticated:
+            raise Http404("You're not logged in")
+        if queryset is None:
+            queryset = self.get_queryset()   # This should help to get current user 
+
+        # Next, try looking up by primary key of Usario model.
+        queryset = queryset.filter(pk=self.request.user.pk)
+
+
+        try:
+            # Get the single item from the filtered queryset
+            obj = queryset.get()
+        except queryset.model.DoesNotExist:
+            raise Http404("No user matching this query")
+        return obj
+
+class UpdateDoctorView(SuccessMessageMixin,UpdateView):
+    model=User
+    form_class = RegisterDoctorForm
+    success_url = "/login-doctor/"
+    template_name = 'core/update.html'
+    success_message = "Your account has been updated successfully. You need to login again"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Update Doctor"
+        return context
+    def get_object(self, queryset=None):
+        if not self.request.user.is_authenticated:
+            raise Http404("You're not logged in")
+        if queryset is None:
+            queryset = self.get_queryset()   # This should help to get current user 
+
+        # Next, try looking up by primary key of Usario model.
+        queryset = queryset.filter(pk=self.request.user.pk)
+
+
+        try:
+            # Get the single item from the filtered queryset
+            obj = queryset.get()
+        except queryset.model.DoesNotExist:
+            raise Http404("No user matching this query")
+        return obj

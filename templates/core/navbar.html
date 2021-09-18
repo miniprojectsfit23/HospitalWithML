@@ -20,7 +20,7 @@
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<li><a class="dropdown-item"
-								href="{%if user.isDoctor%}/update-doctor/{%else%}/update-patient/{%endif%}"><i
+								href="{%if user.isDoctor%}{% url 'core:update-doctor' user.pk %}{%else%}{% url 'core:update-patient' user.pk %}{%endif%}"><i
 									class="fa fa-user" aria-hidden="true"></i>Update Profile</a></li>
 						{%if user.isDoctor%}
 						<li><a class="dropdown-item" href="/edit-patients/"><i class="fas fa-edit"></i>Add/Remove
