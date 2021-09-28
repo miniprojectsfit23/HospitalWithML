@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<form method="post" id="add_pat">
+	{% csrf_token %}
+	<input type="hidden" name="toggle" value="add">
+	<label for="add_pat">Add this Patient: </label>
+	<select id="add_pat" name="add_patlist" form="add_pat">
+		<option disabled selected value> -- select an option -- </option>
+		{%for add_patient in add_patients%}
+		<option value="{{add_patient.username}}">{{add_patient.first_name}} {{add_patient.last_name}}</option>
+		{%endfor%}
+	</select>
+	<button type="submit">Add</button>
+</form>
+<form method="post" id="remove_pat">
+	{% csrf_token %}
+	<input type="hidden" name="toggle" value="remove">
+	<label for="remove_pat">Remove this Patient: </label>
+	<select id="remove_pat" name="remove_patlist" form="remove_pat">
+		<option disabled selected value> -- select an option -- </option>
+		{%for rem_patient in rem_patients%}
+		<option value="{{rem_patient.username}}">{{rem_patient.first_name}} {{rem_patient.last_name}}</option>
+		{%endfor%}
+	</select>
+	<button type="submit">Remove</button>
+</form>
+{% endblock content %}

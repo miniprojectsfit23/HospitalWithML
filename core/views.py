@@ -49,6 +49,8 @@ class RegisterPatientView(SuccessMessageMixin,CreateView):
         return context
 
 def login_view_doctor(request):
+    if request.user.is_authenticated:
+        return redirect("/")
     form = LoginFormDoctor(request.POST or None)
     if request.POST and form.is_valid():
         user = form.login(request)
@@ -64,6 +66,8 @@ def login_view_doctor(request):
     return render(request, 'core/login.html', {'title':'Login as Doctor','form': form })
 
 def login_view_patient(request):
+    if request.user.is_authenticated:
+        return redirect("/")
     form = LoginFormPatient(request.POST or None)
     if request.POST and form.is_valid():
         user = form.login(request)

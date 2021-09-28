@@ -1,0 +1,12 @@
+{%extends 'core/base.html'%}
+{%block content%}
+<h1>My Profile</h1>
+<a style="display:inline;"
+	href="{%if user.isDoctor%}{% url 'core:update-doctor' user.pk %}{%else%}{% url 'core:update-patient' user.pk %}{%endif%}"
+	class="btn btn-primary">Update Profile</a>
+<h2>Name : {{user.first_name}} {{user.last_name}}</h2>
+<h2>Email : {{user.username}}</h2>
+<h2>Age : {{user.age}}</h2>
+<h2>Diseases : {{user.disease}}</h2>
+<h2>Allergies : {{user.allergies}}</h2>
+{%endblock%}

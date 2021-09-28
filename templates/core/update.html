@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2>{{title}}</h2>
+<form method="post">
+	{% csrf_token %}
+	<!-- <input type="hidden" value="{% if title == 'Register As Patient' %}False{%else%}True{%endif%}" name="isDoctor"> -->
+	{{ form.as_p }}
+	<button type="submit">Update</button>
+	<a class="btn btn-danger" href="/"> Cancel </a>
+</form>
+{% endblock content %}

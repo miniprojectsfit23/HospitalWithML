@@ -23,7 +23,7 @@
 								href="{%if user.isDoctor%}{% url 'core:update-doctor' user.pk %}{%else%}{% url 'core:update-patient' user.pk %}{%endif%}"><i
 									class="fa fa-user" aria-hidden="true"></i>Update Profile</a></li>
 						{%if user.isDoctor%}
-						<li><a class="dropdown-item" href="/edit-patients/"><i class="fas fa-edit"></i>Add/Remove
+						<li><a class="dropdown-item" href="/edit-patients/"><i class="fas fa-edit"></i>Manage
 								Patients</a></li>
 						{%endif%}
 					</ul>
