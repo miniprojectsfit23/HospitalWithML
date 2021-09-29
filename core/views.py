@@ -161,3 +161,17 @@ class UpdateDoctorView(SuccessMessageMixin,UpdateView):
         except queryset.model.DoesNotExist:
             raise Http404("No user matching this query")
         return obj
+
+def delete_view(request):
+    if request.method=='GET':
+        if request.user.is_authenticated:
+            return render(request, 'core/delete.html', {'title':'Delete user'})
+        else:
+            return redirect("/")
+    elif request.method=='POST':
+        if request.user.is_authenticated:
+            request.user.delete()
+            logout(request)
+            return redirect("/")
+        else:
+            return redirect("/")
