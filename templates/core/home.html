@@ -1,4 +1,304 @@
 {%extends 'core/base.html'%}
 {%block content%}
-<h1>Generic Hospital Home Page</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    @font-face {
+        font-family: logoFont;
+        src: url(assets/VeganStylePersonalUse-5Y58.ttf);
+    }
+
+    container {
+        padding: 1% 1%;
+    }
+
+    .container1 {
+        position: relative;
+        text-align: center;
+        color: black;
+        font-size: 75px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+    }
+
+    .card-body {
+        background-color: antiquewhite;
+    }
+
+    @import url(https://fonts.googleapis.com/css?family=Alegreya+Sans:300);
+
+    body {
+        font-family: 'Alegreya Sans', sans-serif;
+    }
+
+
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+
+    body {
+
+        margin-bottom: 300px;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        height: 200px;
+    }
+
+
+    @media (max-width: 567em) {
+        body {
+            margin-bottom: 500px;
+        }
+
+        .footer {
+            height: 400px;
+        }
+    }
+
+
+    footer {
+        padding-top: 30px;
+        background-color: #292c2f;
+        color: #bbb;
+    }
+
+    footer a {
+        color: #999;
+        text-decoration: none;
+    }
+
+    footer a:hover,
+    footer a:focus {
+        color: #aaa;
+        text-decoration: none;
+        border-bottom: 1px dotted #999;
+    }
+
+    footer .form-control {
+        background-color: #1f2022;
+        box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
+        border: none;
+        resize: none;
+        color: #d1d2d2;
+        padding: 0.7em 1em;
+    }
+
+    .button1 {
+        background-color: aliceblue;
+        border-radius: 2px;
+        width: 15%;
+    }
+
+    .top-text {
+        color: darkblue;
+        padding: 20px;
+        border: 5px solid;
+        margin-right: 30%;
+        margin-left: 30%;
+        border-radius: 50px 20px;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home</title>
+</head>
+
+<body>
+    <!-- Container-->
+    <div class="container1">
+        <!-- <img src="./assets/morocco-container.jfif" width="100%" height=800px>
+        <div class="centered" style="color:rgb(255, 255, 255);">Morocco<br>
+            <a class="btn" href="https://www.youtube.com/watch?v=C0oh-o1pY7A" target="_blank" style="font-size: 45px;">
+                <i class="fas fa-play-circle"></i>Watch Video </a>
+
+        </div> -->
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000">
+                    <img src="{% static 'core/images/1.jpg' %}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="{% static 'core/images/2.png' %}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'core/images/5.png' %}" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!-- Container-->
+    <div class="container">
+        <h1 class="top-text text-center">Morocco</h1>
+        <br>
+        <br>
+        <br>
+        <p style="font-family:verdana;">
+        <h3>Morocco</h3>
+        </p>
+        <div class="text-align">
+
+            <p p style="text-align:justify">
+                Morocco,officially the Kingdom of Morocco,is the northwesternmost country in the Maghreb region
+                of North Africa. It overlooks the Mediterranean Sea to the north and the Atlantic Ocean to the west, and
+                has land borders with Algeria to the east, and the disputed territory of Western Sahara to the south.
+                Morocco also claims the Spanish exclaves of Ceuta, Melilla and Peñón de Vélez de la Gomera, and several
+                small Spanish-controlled islands off its coast.It spans an area of 446,550 km2 (172,410 sq mi) or
+                710,850 km2 (274,460 sq mi),[b] with a population of roughly 37 million. Its official and predominant
+                religion is Islam, and the official languages are Arabic and Berber; the Moroccan dialect of Arabic and
+                French are also widely spoken. Moroccan identity and culture is a vibrant mix of Berber, Arab, and
+                European cultures. Its capital is Rabat, while its largest city is Casablanca.
+            </p>
+        </div>
+        <p style="font-family:verdana;">
+        <h3>How to Get There</h3>
+        <br>
+        <ul>
+            <h5><i><b>-How to Reach Morocco by Sea</b></i></h5>
+            If you come by boat, there are three main Moroccan ferry ports, namely: the port of Tangier city, the port
+            of Agadir, and the port of Casablanca. Famous for being the door of Africa, these ports are connected to the
+            ports of Europe, especially France, Spain and Italy, through a wide network of ferry lines.Whatever means of
+            transport you have chosen, there will always be a plane or a boat, to take you very quickly as close as
+            possible to your Moroccan destination.
+
+            <br /></br>
+
+            <h5><i><b>-How to Reach Morocco by Air</b></i></h5>
+            With 25 airports scattered all across Morocco, there are several airports in Morocco that are able to serve
+            your needs, while providing you with banking services, foreign exchange agencies, shopping malls fitted out
+            according to the new concept of "walkthrough", catering and relaxation areas.
+
+            The airport of Marrakech-Menara, being considered as the most beautiful airport in the world according to
+            the 2017 ranking by the Skyteam Alliance that unites 19 world airlines, has a cultural identity that brings
+            together authenticity and modernity.
+
+            <br /></br>
+
+            <h5><i><b>-How to Reach Morocco by Road</b></i></h5>
+            Driving to Morocco is easy and doesn’t represent any serious threat of difficult process. Driving in Morocco
+            is as normal as driving in any other country. Entrance papers for taking your car into Morocco are the
+            normal car papers you need in your own country with one exception, you need a car insurance valid to
+            Morocco.Just follow this sign L’assurance aux frontières and you’ll find the insurance office just 10 meters
+            after. Very easy to find. If you don’t have Moroccan Dirhams you can either exchange some money in a nerby
+            exchange border office or just take some cash out using the ATM machine.
+
+            This car insurance to Morocco can be acquired on the Moroccan border, very easy process. Buying car
+            insurance at the Tangier border costs around 50 Euros for 5 days; and around 80 Euros for 10 days insurance.
+
+            <br /></br>
+            </p>
+        </ul>
+        <br>
+
+
+        <p style="font-family:verdana;" p style="text-align:justify">
+        <h3>Places to Visit</h3>
+        <br>
+        <ol>
+            <li> <b>Meknes – The Ninth Century Medina</b> </li>
+            <img src="./assets/morocco-meknes.jpg" width="730" height="464" alt=""><br /> </br>
+            <li> <b>Asilah – Sandy Beaches And Prolonged City Walls</b> </li>
+            <img src="./assets/morocco-Asilah.jpg" alt=""><br /> </br>
+            <li> <b>High Atlas – Paradise For Trekkers</b> </li>
+            <img src="./assets/morocco-High-Atlas.jpg" alt=""><br /> </br>
+            <li> <b>Sahara Desert – Glance Sunset Over Dunes</b> </li>
+            <img src="./assets/morocco-Sahara.jpg" alt=""><br /> </br>
+            <li> <b>Rabat – Stunning Capital City</b> </li>
+            <img src="./assets/morocco-Rabat.jpg" alt="">
+        </ol>
+        </p>
+    </div>
+
+    </div>
+    </div>
+    </div>
+    <!-- Footer-->
+    <div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <h5>Group 1 Batch 1 TEITB</h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <ul class="list-unstyled">
+                                    <li><a href="">Varun Patkar</a></li>
+                                    <li><a href="">Tanish Parmar</a></li>
+                                    <li><a href="">Parth Narvekar</a></li>
+                                    <li><a href="">Vedant Pawar</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <ul class="list-unstyled">
+                                    <li><a href="">12</a></li>
+                                    <li><a href="">08</a></li>
+                                    <li><a href="">02</a></li>
+                                    <li><a href="">13</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="col-md-5">
+                        <form action="https://getform.io/f/ff2982d1-b222-4ec3-9eb3-2e9676a1cbc4" method="POST"
+                            target="_blank">
+                            <p>Contact Us</p>
+                            <br>
+                            <fieldset class="form-group">
+                                <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Name">
+                            </fieldset>
+                            <br>
+                            <br>
+                            <fieldset class="form-group">
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Enter email">
+                            </fieldset>
+                            <br>
+                            <br>
+                            <fieldset class="form-group text-xs-right">
+                                <div class="button1">
+                                    <button type="submit" class="btn btn-secondary-outline btn-lg" value="submit"
+                                        onclick="return submit()">Send</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>
 {%endblock%}
