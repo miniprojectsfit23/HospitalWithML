@@ -76,18 +76,18 @@ WSGI_APPLICATION = 'HospitalWithML.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "djongo",
-        "CLIENT": {
-            'name': 'HospitalWithMLDB',
-            'host': 'mongodb+srv://'+MONGODB_USERNAME+':'+MONGODB_PASS+'@cluster0.xz3j1.mongodb.net/HospitalWithMLDB?retryWrites=true&w=majority',
-            'username': MONGODB_USERNAME,
-            'password': MONGODB_PASS,
-            "authMechanism": "SCRAM-SHA-1",
-        },
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "djongo",
+#         "CLIENT": {
+#             'name': 'HospitalWithMLDB',
+#             'host': 'mongodb+srv://'+MONGODB_USERNAME+':'+MONGODB_PASS+'@cluster0.xz3j1.mongodb.net/HospitalWithMLDB?retryWrites=true&w=majority',
+#             'username': MONGODB_USERNAME,
+#             'password': MONGODB_PASS,
+#             "authMechanism": "SCRAM-SHA-1",
+#         },
+#     }
+# }
 
 
 # Password validation
