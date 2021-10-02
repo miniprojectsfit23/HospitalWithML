@@ -1,0 +1,95 @@
+{%extends 'core/base.html'%}
+{%block content%}
+{%if resultPresent%}
+Result : {%if result%}Patient has high chance of heart disease{%else%}Patient has low chance of heart disease{%endif%}
+{%endif%}
+<form method="POST">
+	{%csrf_token%}
+	<div class="form-group">
+		<label for="first"><strong>Age </strong></label> <input class="form-control" id="first" name="age" type="number"
+			required="required" style="font-weight: bold">
+	</div>
+
+	<div class="form-group">
+		<label for="second"><strong>Gender (1 = male; 0 = female)</strong></label><select class="form-control"
+			name="sex" style="font-weight: bold" required="">
+			<option value="0">Female</option>
+			<option value="1">Male</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label for="third"><strong>Chest Pain Type</strong></label>
+		<select name="cp" class="form-control" style="font-weight: bold" required="">
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label for="fourth"><strong>Resting Blood Pressure (in mm Hg) </strong></label> <input class="form-control"
+			id="fourth" name="trestbps" type="number" required="required" style="font-weight: bold">
+	</div>
+
+	<div class="form-group">
+		<label for="fifth"><strong>Resting Electrocardiographic Results</strong></label>
+		<select name="restecg" class="form-control" style="font-weight: bold" required="">
+			<option value="0">0</option>
+			<option value="1">1</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label for="sixth"><strong>MaxHeartRate (maximum heart rate achieved eg. 156, 173, 187,...)</strong></label>
+		<input class="form-control" id="sixth" name="thalach" type="number" required="required"
+			style="font-weight: bold">
+	</div>
+
+	<div class="form-group">
+		<label for="seventh"><strong>Exercise Induced Angina (0 = No; 1 = Yes)</strong></label>
+		<select name="exang" class="form-control" style="font-weight: bold" required="">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label for="eighth"><strong>STdepression (ST depression induced by exercise relative to rest eg. 0.8, 1.4,
+				3.5,...) </strong></label> <input class="form-control" id="eighth" name="oldpeak" type="number"
+			step="any" required="required" style="font-weight: bold">
+	</div>
+
+	<div class="form-group">
+		<label for="ninth"><strong>Slope of the peak exercise ST segment</strong></label>
+		<select name="slope" class="form-control" style="font-weight: bold" required="">
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label for="tenth"><strong>Number of major vessels</strong></label>
+		<select name="ca" class="form-control" style="font-weight: bold" required="">
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label for="eleventh"><strong>Thalassemia (1=Normal; 2=Fixed Defect; 3=Reversable)</strong></label>
+		<select name="thal" class="form-control" style="font-weight: bold" required="">
+			<option value="1">Normal</option>
+			<option value="2">Fixed Defect</option>
+			<option value="3">Reversable</option>
+		</select>
+	</div>
+	<br><br>
+	<button class="btn btn-primary" type="submit ">Predict</button>
+</form>
+{%endblock%}

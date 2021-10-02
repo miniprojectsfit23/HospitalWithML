@@ -13,8 +13,33 @@ def list_all(request):
     else:
         return redirect("/")
 
-model=joblib.load('model/heartdisease.pkl')
-
 def heartdisease(request):
-    print(model.predict(pd.DataFrame([[0.6875,0.,0.,0.28301887,0.5,0.702290080,0.,0.,1.,0.,0.66666667]])))
-    return redirect("/")
+    if request.method == 'GET':
+        return render(request, "ml_tools/heart.html", {'title':'Heart Disease Detector','resultPresent':False})
+    elif request.method == 'POST':
+        age=int(request.POST["age"])
+        sex=int(request.POST["sex"])
+        cp=int(request.POST["cp"])
+        trestbps=int(request.POST["trestbps"])
+        restecg=int(request.POST["restecg"])
+        thalach=int(request.POST["thalach"])
+        exang=int(request.POST["exang"])
+        oldpeak=float(request.POST["oldpeak"])
+        slope=int(request.POST["slope"])
+        ca=int(request.POST["ca"])
+        thal=int(request.POST["thal"])
+        test=pd.DataFrame([[age,sex,cp,trestbps,restecg,thalach,exang,oldpeak,slope,ca,thal]],columns=['age', 'sex', 'cp', 'trestbps','restecg', 'thalach',
+       'exang', 'oldpeak', 'slope', 'ca', 'thal'])
+        model=joblib.load('model/heartdisease.pkl')
+        df=pd.read_csv('model/heart.csv')
+        X=df.drop(['target', 'fbs', 'chol'], axis=1)
+        y=df['target']
+        df=df.drop(['target','fbs', 'chol'], axis=1)
+        X_train, X_test, _, _ = sklearn.model_selection.train_test_split(X, y, test_size=0.30, random_state=42)
+        scaler = sklearn.preprocessing.MinMaxScaler()
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
+        test=scaler.transform(test)
+        result=model.predict(test)
+        print(result[0])
+        return render(request, "ml_tools/heart.html", {'title':'Heart Disease Detector','resultPresent':True,'result':False if result[0]==0 else True})
