@@ -17,18 +17,9 @@ def heartdisease(request):
     if request.method == 'GET':
         return render(request, "ml_tools/heart.html", {'title':'Heart Disease Detector','resultPresent':False})
     elif request.method == 'POST':
-        age=int(request.POST["age"])
-        sex=int(request.POST["sex"])
-        cp=int(request.POST["cp"])
-        trestbps=int(request.POST["trestbps"])
-        restecg=int(request.POST["restecg"])
-        thalach=int(request.POST["thalach"])
-        exang=int(request.POST["exang"])
-        oldpeak=float(request.POST["oldpeak"])
-        slope=int(request.POST["slope"])
-        ca=int(request.POST["ca"])
-        thal=int(request.POST["thal"])
-        test=pd.DataFrame([[age,sex,cp,trestbps,restecg,thalach,exang,oldpeak,slope,ca,thal]],columns=['age', 'sex', 'cp', 'trestbps','restecg', 'thalach',
+        test=pd.DataFrame([[int(request.POST["age"]),int(request.POST["sex"]),int(request.POST["cp"]),int(request.POST["trestbps"]),int(request.POST["restecg"]),int(request.POST["thalach"])
+        ,int(request.POST["exang"]),float(request.POST["oldpeak"]),int(request.POST["slope"]),int(request.POST["ca"])
+        ,int(request.POST["thal"])]],columns=['age', 'sex', 'cp', 'trestbps','restecg', 'thalach',
        'exang', 'oldpeak', 'slope', 'ca', 'thal'])
         model=joblib.load('model/heartdisease.pkl')
         df=pd.read_csv('model/heart.csv')
@@ -43,3 +34,21 @@ def heartdisease(request):
         result=model.predict(test)
         print(result[0])
         return render(request, "ml_tools/heart.html", {'title':'Heart Disease Detector','resultPresent':True,'result':False if result[0]==0 else True})
+
+def breastcancer(request):
+    if request.method == 'GET':
+        return render(request, "ml_tools/breastcancer.html", {'title':'Heart Disease Detector','resultPresent':False})
+    elif request.method == 'POST':
+        test=pd.DataFrame([[float(request.POST['texture_mean']), float(request.POST['perimeter_mean']), float(request.POST['smoothness_mean']), float(request.POST['compactness_mean']),
+        float(request.POST['concavity_mean']), float(request.POST['concave points_mean']), float(request.POST['symmetry_mean']), float(request.POST['radius_se']),
+        float(request.POST['compactness_se']), float(request.POST['concavity_se']), float(request.POST['concave points_se']), float(request.POST['texture_worst']),
+        float(request.POST['smoothness_worst']), float(request.POST['compactness_worst']), float(request.POST['concavity_worst']),
+        float(request.POST['concave points_worst']), float(request.POST['symmetry_worst']), float(request.POST['fractal_dimension_worst'])]],columns=['texture_mean', 'perimeter_mean', 'smoothness_mean', 'compactness_mean',
+       'concavity_mean', 'concave points_mean', 'symmetry_mean', 'radius_se',
+       'compactness_se', 'concavity_se', 'concave points_se', 'texture_worst',
+       'smoothness_worst', 'compactness_worst', 'concavity_worst',
+       'concave points_worst', 'symmetry_worst', 'fractal_dimension_worst'])
+        model=joblib.load('model/breastcancer.pkl')
+        result=model.predict(test)
+        return render(request, "ml_tools/breastcancer.html", {'title':'Heart Disease Detector','resultPresent':True,'result':False if result[0]==0 else True
+        })
