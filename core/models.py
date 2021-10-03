@@ -10,6 +10,7 @@ import uuid
 class User(AbstractUser):
     isDoctor = models.BooleanField(verbose_name="Is User a Doctor?")
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    profile_pic=models.ImageField(verbose_name="Profile Photo",upload_to="core/static/images/profile_pics/",default=None,null=True,blank=True)
     first_name = models.CharField(max_length=200, verbose_name="First Name")
     last_name = models.CharField(max_length=200, verbose_name="Last Name")
     username = models.EmailField(

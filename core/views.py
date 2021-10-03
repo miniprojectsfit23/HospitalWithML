@@ -175,3 +175,17 @@ def delete_view(request):
             return redirect("/")
         else:
             return redirect("/")
+
+def update_profile_pic(request):
+    this_user=request.user
+    if this_user.is_authenticated:
+        if request.method == "GET":
+            return render(request, 'core/update_profile_pic.html', {'title':'Update Profile Picture'})
+        elif request.method == "POST":
+            if this_user.profile_pic:
+                this_user.profile_pic.delete(save=True)
+            this_user.profile_pic=request.FILES.get("profile_pic")
+            this_user.save()
+            return redirect("/")
+    else:
+        return redirect("/")

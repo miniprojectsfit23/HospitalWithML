@@ -1,0 +1,9 @@
+{%extends 'core/base.html'%}
+{%block content%}
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	<label for="profile_pic">Upload new Profile Picture:</label><br>
+	<input type="file" class="form-control-file" name="profile_pic" accept="image/*" id="profile_pic"><br>
+	<button class="btn btn-danger" type="submit">Update</button>
+</form>
+{%endblock%}

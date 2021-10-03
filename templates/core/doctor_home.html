@@ -1,11 +1,22 @@
 {%extends 'core/base.html'%}
 {%block content%}
+{%load static%}
 <h1>My Profile</h1>
 <a style="display:inline;"
 	href="{%if user.isDoctor%}{% url 'core:update-doctor' user.pk %}{%else%}{% url 'core:update-patient' user.pk %}{%endif%}"
 	class="btn btn-primary">Update Profile</a>
 <a style="display:inline;" href="/edit-patients/" class="btn btn-primary">Manage Patients</a>
 <a style="display:inline;" href="/delete/" class="btn btn-danger">Delete Your Profile</a>
+<br>
+<br>
+<h2>Profile Picture:</h2>
+{%if user.profile_pic%}
+<img src="/{{user.profile_pic.url|slice:'5:'}}" alt="Uploaded Profile Pic" height="250px">
+{%else%}
+<img src="{% static 'core/images/default_profile_pic.png' %}" alt="Default Profile Pic" height="250px">
+{%endif%}
+<br>
+<a href="/update_profile_pic/" class="btn btn-danger">Update Profile Picture</a>
 <h2>Name : {{user.first_name}} {{user.last_name}}</h2>
 <h2>Email : {{user.username}}</h2>
 <h2>Specialization : {{user.specialization}}</h2>
