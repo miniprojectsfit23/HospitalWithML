@@ -17,7 +17,6 @@ class RegisterDoctorForm(UserCreationForm):
     class Meta:
         model = User
         fields = [
-            'profile_pic',
             'first_name',
             'last_name',
             'username',
@@ -40,7 +39,6 @@ class RegisterPatientForm(UserCreationForm):
     class Meta:
         model = User
         fields = [
-            'profile_pic',
             'first_name',
             'last_name',
             'username',
