@@ -3,6 +3,13 @@ from django.shortcuts import redirect
 import joblib
 import pandas as pd
 import sklearn
+from tensorflow import keras
+import cv2
+from PIL import Image
+import numpy as np
+from .models import MalariaImage
+from django.core.files.images import ImageFile
+
 # Create your views here.
 def list_all(request):
     if request.user.is_authenticated:
@@ -51,4 +58,31 @@ def breastcancer(request):
         model=joblib.load('model/breastcancer.pkl')
         result=model.predict(test)
         return render(request, "ml_tools/breastcancer.html", {'title':'Heart Disease Detector','resultPresent':True,'result':False if result[0]==0 else True
+        })
+
+def malariadetect(request):
+    if request.method == 'GET':
+        return render(request, "ml_tools/malariadetect.html", {'title':'Malaria Detector','resultPresent':False})
+    elif request.method == 'POST':
+        cell_sample=request.FILES.get("cell_sample")
+        img_name=cell_sample.name
+        if MalariaImage.objects.filter(image='ml_tools/static/ml_tools/images/malaria_uploads/'+img_name).exists():
+            pass
+        else:
+            try:
+                MalariaImage.objects.create(image=cell_sample)
+            except:
+                m=MalariaImage.objects.create(image=None)
+                m.image=ImageFile(open('ml_tools/static/ml_tools/images/malaria_uploads/'+img_name, "rb")) 
+                m.save()
+        img=cv2.imread('ml_tools/static/ml_tools/images/malaria_uploads/'+img_name)
+        img = Image.fromarray(img, 'RGB')
+        img = np.array(img.resize((30, 30)))
+        img_arr=[]
+        img_arr.append(img)
+        img_arr=np.array(img_arr)
+        img_arr = img_arr.astype('float32')/255
+        model=keras.models.load_model('model/malariadisease.h5')
+        result=model.predict(img_arr)
+        return render(request, "ml_tools/malariadetect.html", {'title':'Malaria Detector','resultPresent':True,'result':round((result[0][0]*100),2)
         })
