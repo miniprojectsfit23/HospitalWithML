@@ -65,3 +65,5 @@ wcwidth==0.2.5
 Werkzeug==2.0.1
 whitenoise==2.0.6
 wrapt==1.12.1
+tensorflow==2.6.0
+opencv-python==4.5.3.56
