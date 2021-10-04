@@ -6,14 +6,14 @@ from django import forms
 class UserDoctorForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('activated', 'isDoctor', 'first_name',
+        fields = ('activated', 'isDoctor','profile_pic', 'first_name',
                   'last_name', 'username', 'specialization','patients',)
 
 
 class UserPatientForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('activated', 'isDoctor', 'first_name', 'last_name',
+        fields = ('activated', 'isDoctor','profile_pic', 'first_name', 'last_name',
                   'username', 'age', 'disease', 'allergies')
 
 class UserAdmin(admin.ModelAdmin):
