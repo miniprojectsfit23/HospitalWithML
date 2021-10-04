@@ -1,9 +1,52 @@
 {%extends 'core/base.html'%}
 {%block content%}
-<form method="POST" enctype="multipart/form-data">
-	{% csrf_token %}
-	<label for="profile_pic">Upload new Profile Picture:</label><br>
-	<input type="file" class="form-control-file" name="profile_pic" accept="image/*" id="profile_pic"><br>
-	<button class="btn btn-danger" type="submit">Update</button>
-</form>
+<style>
+	.container {
+		padding: 100px 100px 100px 100px;
+		align-content: justify;
+	}
+
+	body {
+		background: #007bff;
+		background: linear-gradient(to right, #0062E6, #33AEFF);
+	}
+
+	.btn-login {
+		font-size: 0.9rem;
+		letter-spacing: 0.05rem;
+		padding: 0.75rem 1rem;
+	}
+
+	input {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		border-radius: 5px;
+	}
+
+	h2 {
+		text-align: center;
+	}
+</style>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+			<div class="card border-0 shadow rounded-3 my-5">
+				<div class="card-body p-4 p-sm-5">
+					<h5 class="card-title text-center mb-5 fw-light fs-5"></h5>
+					<h2>Edit Profile Picture</h2>
+					<br>
+					<form method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						<label for="profile_pic"><b>Upload new Profile Picture</b></label><br>
+						<input type="file" class="form-control-file" name="profile_pic" accept="image/*"
+							id="profile_pic"><br>
+						<button class="btn btn-danger text-uppercase fw-bold" type="submit"
+							style="width: 100%;">Update</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {%endblock%}

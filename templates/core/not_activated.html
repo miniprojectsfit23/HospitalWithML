@@ -1,4 +1,44 @@
 {%extends 'core/base.html'%}
 {%block content%}
-<h1>Your account is not activated yet. Please contact the administrator for activation</h1>
+<style>
+    .container {
+        padding: 100px 100px 100px 100px;
+        align-content: justify;
+    }
+
+    body {
+        background: #007bff;
+        background: linear-gradient(to right, #0062E6, #33AEFF);
+    }
+
+
+
+    input {
+        width: 95%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        border-radius: 5px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+</style>
+<div class="container">
+    <div class="row ">
+        <div class="col d-flex justify-content-center">
+            <div class="card border-0 shadow rounded-3 my-12">
+                <div class="card-body p-4 p-sm-5">
+                    <h5 class="card-title text-center mb-5 fw-light fs-5"></h5>
+                    <h1>Your account is not activated yet. Please contact the administrator for activation.
+                    </h1>
+
+                    <i class="fas fa-user-lock fa-10x" style="align-items: center;"></i>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {%endblock%}
