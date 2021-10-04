@@ -110,7 +110,7 @@ class UpdatePatientView(SuccessMessageMixin,UpdateView):
     model=User
     form_class = RegisterPatientForm
     success_url = "/login-patient/"
-    template_name = 'core/update.html'
+    template_name = 'core/update_patient.html'
     success_message = "Your account has been updated successfully. You need to login again"
 
     def get_context_data(self, **kwargs):
@@ -138,7 +138,7 @@ class UpdateDoctorView(SuccessMessageMixin,UpdateView):
     model=User
     form_class = RegisterDoctorForm
     success_url = "/login-doctor/"
-    template_name = 'core/update.html'
+    template_name = 'core/update_doctor.html'
     success_message = "Your account has been updated successfully. You need to login again"
 
     def get_context_data(self, **kwargs):
