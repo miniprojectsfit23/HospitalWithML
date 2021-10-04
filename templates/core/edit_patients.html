@@ -1,28 +1,93 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-<form method="post" id="add_pat">
-	{% csrf_token %}
-	<input type="hidden" name="toggle" value="add">
-	<label for="add_pat">Add this Patient: </label>
-	<select id="add_pat" name="add_patlist" form="add_pat">
-		<option disabled selected value> -- select an option -- </option>
-		{%for add_patient in add_patients%}
-		<option value="{{add_patient.username}}">{{add_patient.first_name}} {{add_patient.last_name}}</option>
-		{%endfor%}
-	</select>
-	<button type="submit">Add</button>
-</form>
-<form method="post" id="remove_pat">
-	{% csrf_token %}
-	<input type="hidden" name="toggle" value="remove">
-	<label for="remove_pat">Remove this Patient: </label>
-	<select id="remove_pat" name="remove_patlist" form="remove_pat">
-		<option disabled selected value> -- select an option -- </option>
-		{%for rem_patient in rem_patients%}
-		<option value="{{rem_patient.username}}">{{rem_patient.first_name}} {{rem_patient.last_name}}</option>
-		{%endfor%}
-	</select>
-	<button type="submit">Remove</button>
-</form>
+<style>
+	.container {
+		padding: 100px 100px 100px 100px;
+		align-content: justify;
+	}
+
+	body {
+		background: #007bff;
+		background: linear-gradient(to right, #0062E6, #33AEFF);
+	}
+
+	.btn-login {
+		font-size: 0.9rem;
+		letter-spacing: 0.05rem;
+		padding: 0.75rem 1rem;
+	}
+
+	input {
+		width: 95%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		border-radius: 5px;
+	}
+
+	h2 {
+		text-align: center;
+	}
+
+	label {
+		width: 130px;
+		clear: left;
+
+		padding-right: 10px;
+	}
+</style>
+<div class="container">
+	<div class="row ">
+		<div class="col d-flex justify-content-center">
+			<div class="card border-0 shadow rounded-3 my-12">
+				<div class="card-body p-4 p-sm-5">
+					<h5 class="card-title text-center mb-5 fw-light fs-5"></h5>
+					<h2 style="text-align: center;">Manage Patients</h2>
+					<br>
+					<br>
+					<form method="post" id="add_pat">
+						<div>
+							{% csrf_token %}
+							<input type="hidden" name="toggle" value="add">
+							<label for="add_pat"><strong>New Clients</strong></label>
+							<select id="add_pat" name="add_patlist" form="add_pat" style="border-radius: 5px;">
+								<option disabled selected value> -- select name -- </option>
+								{%for add_patient in add_patients%}
+								<option value="{{add_patient.username}}">{{add_patient.first_name}}
+									{{add_patient.last_name}}</option>
+								{%endfor%}
+							</select>
+						</div>
+						<br>
+						<div>
+							<button class="btn btn-primary text-uppercase fw-bold" style="width: 100%;"
+								type="submit">Add</button>
+						</div>
+					</form>
+					<br>
+					<br>
+					<form method="post" id="remove_pat">
+						<div>
+							{% csrf_token %}
+							<input type="hidden" name="toggle" value="remove">
+							<label for="remove_pat"><strong>Existing Clients</strong></label>
+							<select id="remove_pat" name="remove_patlist" form="remove_pat" style="border-radius: 5px;">
+								<option disabled selected value> -- select name -- </option>
+								{%for rem_patient in rem_patients%}
+								<option value="{{rem_patient.username}}">{{rem_patient.first_name}}
+									{{rem_patient.last_name}}</option>
+								{%endfor%}
+							</select>
+						</div>
+						<br>
+						<div>
+							<button class="btn btn-primary  text-uppercase fw-bold" style="width: 100%;"
+								type="submit">Remove</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock content %}
