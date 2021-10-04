@@ -28,7 +28,7 @@ def homeview(request):
 class RegisterDoctorView(SuccessMessageMixin,CreateView):
     form_class = RegisterDoctorForm
     success_url = "/login-doctor/"
-    template_name = 'core/signup.html'
+    template_name = 'core/signup_doctor.html'
     success_message = "You have been registered successfully. Please contact Administrator for activation"
 
     def get_context_data(self, **kwargs):
@@ -40,7 +40,7 @@ class RegisterDoctorView(SuccessMessageMixin,CreateView):
 class RegisterPatientView(SuccessMessageMixin,CreateView):
     form_class = RegisterPatientForm
     success_url = "/login-patient/"
-    template_name = 'core/signup.html'
+    template_name = 'core/signup_patient.html'
     success_message = "You have been registered successfully. Please contact Administrator for activation"
 
     def get_context_data(self, **kwargs):
