@@ -27,7 +27,7 @@ MONGODB_PASS = os.environ.get("MONGODB_PASS")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True#turn this off
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1',]
+ALLOWED_HOSTS = ['localhost','127.0.0.1','hospital-with-ml.herokuapp.com']
 
 
 # Application definition
