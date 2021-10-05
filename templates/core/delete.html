@@ -1,10 +1,55 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-<h1>Are you sure you want to delete the user {{user.first_name}} {{user.last_name}}</h1>
-<form method="post">
-	{%csrf_token%}
-	<input style="display:inline;" type="submit" class="btn btn-danger"><a style="display:inline;" href="/"
-		class="btn btn-primary">Cancel</a>
-</form>
+<style>
+	.container {
+		padding: 100px 100px 100px 100px;
+		align-content: justify;
+	}
+
+	body {
+		background: #007bff;
+		background: linear-gradient(to right, #0062E6, #33AEFF);
+	}
+
+
+
+	input {
+		width: 95%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		border-radius: 5px;
+	}
+
+	h2 {
+		text-align: center;
+	}
+</style>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+			<div class="card border-0 shadow rounded-3 my-5">
+				<div class="card-body p-4 p-sm-5">
+					<h5 class="card-title text-center mb-5 fw-light fs-5"></h5>
+					<h1>Are you sure you want to delete the user {{user.first_name}} {{user.last_name}} ?</h1>
+					<i class="fas fa-exclamation-triangle fa-10x" style="padding-left: 95px;"></i>
+					<br>
+					<br>
+					<form method="post">
+
+						{%csrf_token%}
+
+						<input style="width: 100%;" type="submit"
+							class="btn btn-danger btn-login text-uppercase fw-bold">
+
+						<a class="btn btn-primary btn-login text-uppercase fw-bold" href="/" style="width: 100%;">
+							Cancel
+						</a>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock content %}
