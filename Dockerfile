@@ -5,8 +5,8 @@ FROM python:3.9.1
 WORKDIR /usr/src/app
 
 # set environment variables
-ENV MONGODB_USERNAME=TheGreatVAPpy
-ENV MONGODB_PASS=6L2X65Ahp0xvTN4m
+ENV MONGODB_USERNAME=VedantPawar
+ENV MONGODB_PASS=pbNGbZyyZ5QDp9Dk
 ENV SECRET_KEY='250033e6422c0368a9c9ada6178476934e9927a75e9f07a4'
 
 RUN apt-get update && apt-get install -y python3-opencv
